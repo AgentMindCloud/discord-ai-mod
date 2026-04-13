@@ -4,16 +4,18 @@ name: "Discord AI Moderator"
 description: "Friendly AI moderator that helps manage your Discord server (X-first)"
 category: "discord"
 tags: ["moderation", "community", "ai-helper"]
-ecosystem: null
+ecosystem: ["grok", "x"]
 repository: "https://github.com/AgentMindCloud/discord-ai-mod"
 update_strategy: "semver"
 preferred_deploy: ["railway", "vercel", "fly"]
+
 deploy:
   target: "railway"
   env:
     DISCORD_TOKEN: "Ask the user for their Discord bot token"
     X_API_KEY: "Ask the user for their X API key"
     GROK_API_KEY: "Ask the user for their Grok API key"
+
 prompts:
   - key: "DISCORD_TOKEN"
     message: "Please paste your Discord bot token:"
@@ -21,10 +23,12 @@ prompts:
     message: "Please paste your X API key:"
   - key: "GROK_API_KEY"
     message: "Please paste your Grok API key:"
+
 error_handlers:
   missing_env: "Oops! Looks like you forgot to provide the X API key. Want me to guide you again?"
   invalid_key: "That API key doesn't look right. Let's try entering it again."
   deployment_failed: "Deployment hit a snag. Want me to try again?"
+
 on_install:
   welcome: "Welcome to Discord AI Moderator! Your agent is now live and ready to help manage your server."
   suggested_commands:
@@ -32,5 +36,6 @@ on_install:
     - "/moderation"
     - "/help"
   share_card: true
+
 security:
   verified_by_grok: true
