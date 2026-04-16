@@ -1,20 +1,19 @@
-# grok-install.yaml – discord-ai-mod (v2.11)
-# Discord AI Moderator with full Phase 10 support
-
-version: "2.11"
-name: "Discord AI Moderator"
-description: "AI-powered Discord moderator that works with connected agents for community safety and alerts."
-repository: "https://github.com/AgentMindCloud/discord-ai-mod"
-category: "discord"
-tags: ["moderator", "discord", "community", "safety", "orchestration", "grok"]
+# grok-install.yaml – twitter-reply-bot (v2.12)
+# Now fully X-native reply bot with Phase 10 + Phase 11 Passive Growth Engine
+version: "2.12"
+name: "Smart Twitter Reply Bot"
+description: "Native X reply bot that intelligently responds to mentions using Grok. Full X-native runtime."
+repository: "https://github.com/AgentMindCloud/twitter-reply-bot"
+category: "x-native"
+tags: ["reply-bot", "x", "twitter", "automation", "grok"]
 featured: true
-ecosystem: ["grok", "x", "discord"]
+ecosystem: ["grok", "x"]
 
 # === PHASE 10 NEW BLOCKS ===
 # Native X Agent Runtime (Goal 1)
 x_native_runtime:
-  type: "custom"
-  permissions: []
+  type: "reply-bot"
+  permissions: ["tweet.read", "tweet.write"]
   grok_orchestrator: true
   one_click_x_deploy: true
 
@@ -40,17 +39,17 @@ safety:
   scan_summary_visible: true
   minimum_keys_only: true
 
-# Orchestration & Triggers (from previous phases – kept and extended)
+# Orchestration & Triggers (from previous phases – kept and slightly extended)
 orchestration:
   enabled: true
-  role: "target"
-  can_trigger: []
-  can_be_triggered_by: ["twitter-reply-bot"]
+  role: "source"
+  can_trigger: ["hermes-telegram-dashboard"]
+  can_be_triggered_by: []
   visual_builder: true
   ai_suggested_patterns: true
   triggers:
     - event: "mention"
-      action: "send_alert"
+      action: "reply_with_grok"
       target_agents: ["hermes"]
 
 llm:
@@ -61,12 +60,12 @@ llm:
 environment:
   variables:
     GROK_API_KEY:
-      description: "Your Grok / xAI API key"
+      description: "Your Grok / xAI API key (required for native X reply functionality)"
       required: true
       secret: true
-    DISCORD_TOKEN:
-      description: "Your Discord bot token"
-      required: true
+    X_API_KEY:
+      description: "Optional X API key for advanced permissions"
+      required: false
       secret: true
 
 deployment:
@@ -75,10 +74,20 @@ deployment:
     - railway
     - docker
 
+# === PHASE 11 NEW BLOCK – Passive Growth Engine ===
+promotion:
+  auto_welcome: true
+  auto_share: true
+  weekly_highlight: true
+  featured: true
+  builder_credits: "@JanSol0s"
+  support_link: "https://github.com/sponsors/JanSol0s"
+
 # Credits (strongly recommended)
 credits:
   standard: "grok-install"
   author: "@JanSol0s"
   url: "https://github.com/AgentMindCloud/grok-install"
-  version: "2.11"
+  version: "2.12"
   message: "Powered by grok-install open standard"
+  
