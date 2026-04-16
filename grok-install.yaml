@@ -1,19 +1,19 @@
-# grok-install.yaml – twitter-reply-bot (v2.12)
-# Now fully X-native reply bot with Phase 10 + Phase 11 Passive Growth Engine
+# grok-install.yaml – discord-ai-mod (v2.12)
+# Discord AI Moderator with full Phase 10 + Phase 11 Passive Growth Engine
 version: "2.12"
-name: "Smart Twitter Reply Bot"
-description: "Native X reply bot that intelligently responds to mentions using Grok. Full X-native runtime."
-repository: "https://github.com/AgentMindCloud/twitter-reply-bot"
-category: "x-native"
-tags: ["reply-bot", "x", "twitter", "automation", "grok"]
+name: "Discord AI Moderator"
+description: "AI-powered Discord moderator that works with other agents for community management and real-time moderation."
+repository: "https://github.com/AgentMindCloud/discord-ai-mod"
+category: "discord"
+tags: ["moderator", "discord", "community", "orchestration", "grok"]
 featured: true
-ecosystem: ["grok", "x"]
+ecosystem: ["grok", "x", "discord"]
 
 # === PHASE 10 NEW BLOCKS ===
 # Native X Agent Runtime (Goal 1)
 x_native_runtime:
-  type: "reply-bot"
-  permissions: ["tweet.read", "tweet.write"]
+  type: "custom"
+  permissions: []
   grok_orchestrator: true
   one_click_x_deploy: true
 
@@ -39,17 +39,17 @@ safety:
   scan_summary_visible: true
   minimum_keys_only: true
 
-# Orchestration & Triggers (from previous phases – kept and slightly extended)
+# Orchestration & Triggers (from previous phases – kept and extended)
 orchestration:
   enabled: true
-  role: "source"
-  can_trigger: ["hermes-telegram-dashboard"]
-  can_be_triggered_by: []
+  role: "target"
+  can_trigger: []
+  can_be_triggered_by: ["twitter-reply-bot"]
   visual_builder: true
   ai_suggested_patterns: true
   triggers:
     - event: "mention"
-      action: "reply_with_grok"
+      action: "moderate_channel"
       target_agents: ["hermes"]
 
 llm:
@@ -60,12 +60,12 @@ llm:
 environment:
   variables:
     GROK_API_KEY:
-      description: "Your Grok / xAI API key (required for native X reply functionality)"
+      description: "Your Grok / xAI API key"
       required: true
       secret: true
-    X_API_KEY:
-      description: "Optional X API key for advanced permissions"
-      required: false
+    DISCORD_TOKEN:
+      description: "Your Discord bot token"
+      required: true
       secret: true
 
 deployment:
@@ -90,4 +90,3 @@ credits:
   url: "https://github.com/AgentMindCloud/grok-install"
   version: "2.12"
   message: "Powered by grok-install open standard"
-  
